@@ -1,6 +1,6 @@
 # Annotations
 
-### Customize the generated Haskell code my modifying particular structures and types
+### Customize the generated Haskell code by modifying particular structures and types
 
 ## Splice files (`hs_include`)
 
