@@ -14,8 +14,8 @@ enum Pet {
 }
 
 struct User {
-  0: string name,
-  1: Pet pet,
+  1: string name,
+  2: Pet pet,
 }
 ```
 
@@ -53,7 +53,7 @@ In addition to data structures, you can also define services and remote procedur
 
 ```
 service UserFetcher {
-  User getUser(0: i64 id)
+  User getUser(1: i64 id)
 }
 ```
 
