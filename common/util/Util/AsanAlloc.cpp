@@ -8,7 +8,9 @@
 
 #include "Util/AsanAlloc.h"
 
+#if !defined (__clang__)
 #include <malloc.h>
+#endif
 
 void* alignedAlloc(size_t alignment, size_t size) noexcept {
 // GCC only supports ASAN aligned_alloc as of September 2014, which roughly
