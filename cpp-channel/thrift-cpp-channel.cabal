@@ -82,6 +82,9 @@ flag clang
 
 library
     import: fb-haskell, fb-cpp
+    cxx-options: 
+        -Wno-deprecated-declarations
+        -Wno-nullability-completeness
     exposed-modules:
         Thrift.Channel.Lib.CppChannel
         Thrift.Channel.Lib.HeaderChannel
@@ -96,7 +99,7 @@ library
 
     hs-source-dirs: .
     build-tool-depends: hsc2hs:hsc2hs
-    hsc2hs-options: --cc=g++ --lflag=-lstdc++ --cflag=-D__HSC2HS__=1 --lflag=-lboost_context --lflag=-latomic --cflag=-std=c++17
+    hsc2hs-options: --cc=g++ --lflag=-lc++ --cflag=-D__HSC2HS__=1 --lflag=-lboost_context --cflag=-std=c++17 --cflag=-isysroot --cflag=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/
     include-dirs: .
 
     pkgconfig-depends: fmt, openssl, libsodium, libzstd, zlib
@@ -116,12 +119,12 @@ library
         async
         wangle
         fizz
-        stdc++
+        c++
         -- TODO: I needed this to satisfy an undefined reference to
         -- jump_fcontext when running hsc2hs
         boost_context
         -- __atomic_is_lock_free (-latomic) missing with clang
-        atomic
+        -- atomic
 
     build-depends:
         base >=4.11.1 && <4.17,

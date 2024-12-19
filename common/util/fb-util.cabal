@@ -60,7 +60,9 @@ common fb-haskell
      ghc-options: -O2
 
 common fb-cpp
-  cxx-options: -std=c++17
+  cxx-options: 
+    -std=c++17
+    -- -funsigned-char
   if !flag(clang)
      cxx-options: -fcoroutines
   if arch(x86_64)
@@ -248,13 +250,13 @@ library
     -- We use hsc2hs with C++ headers, so we need to compile the
     -- generated code with g++. The hsc2hs-generated binary is linked
     -- by ghc, because we depend on a Haskell package (mangle).
-    hsc2hs-options: --cc=g++ --lflag=-lstdc++ --cflag=-D__HSC2HS__=1 --cflag=-std=c++17
+    hsc2hs-options: --cc=g++ --lflag=-lc++ --cflag=-D__HSC2HS__=1 --cflag=-std=c++17 --cflag=-isysroot --cflag=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/
 
     pkgconfig-depends: libfolly, libglog, libevent, fmt, gflags
     extra-libraries: double-conversion
 
 common test-common
-  extra-libraries: stdc++
+  extra-libraries: c++
   ghc-options: -threaded
   hs-source-dirs: tests, tests/github
   other-modules: SpecRunner
@@ -293,7 +295,7 @@ common test-common
   -- We use hsc2hs with C++ headers, so we need to compile the
   -- generated code with g++. The hsc2hs-generated binary is linked
   -- by ghc.
-  hsc2hs-options: --cc=g++ --lflag=-lstdc++ --cflag=-D__HSC2HS__=1 --cflag=-std=c++17
+  hsc2hs-options: --cc=g++ --lflag=-lc++ --cflag=-D__HSC2HS__=1 --cflag=-std=c++17 --cflag=-isysroot --cflag=/Library/Developer/CommandLineTools/SDKs/ MacOSX.sdk/
 
 
 test-suite stream
